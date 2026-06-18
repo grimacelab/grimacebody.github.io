@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en-GB" style="scroll-behavior: smooth;">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THE GRIMACE LAB</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght=0,400;0,500;1,400&display=swap" rel="stylesheet"> 
+    <style>
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 100px;
+        }
+        :root {
+            --bg: #F9F9F9;
+            --text: #1A1A1A;
+            --accent: #E0E0E0;
+            --faint-box: #EDEDED;
+            --white: #FFFFFF;
+        }
+        
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.7;
+            margin: 0;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Navigation */
+        nav {
+            padding: 25px 5%;
+            display: flex;
+            justify-content: flex-end;
+            gap: 35px;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            border-bottom: 1px solid var(--accent);
+            position: sticky;
+            top: 0;
+            background: rgba(249, 249, 249, 0.95);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            z-index: 100;
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: inherit;
+            opacity: 0.6;
+            transition: opacity 0.3s, border-color 0.3s;
+            padding-bottom: 4px;
+            border-bottom: 1px solid transparent;
+        }
+        
+        nav a:hover {
+            opacity: 1;
+            border-color: var(--text);
+        }
+
+        /* Layout Framework */
+        header, section, footer {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-left: 5%;
+            padding-right: 5%;
+        }
+
+        header {
+            padding-top: 140px;
+            padding-bottom: 90px;
+            border-bottom: 1px solid var(--accent);
+        }
+        
+        .meta-header {
+            font-size: 0.7rem; 
+            text-transform: uppercase; 
+            letter-spacing: 0.12em; 
+            margin-bottom: 25px; 
+            opacity: 0.5; 
+            font-family: monospace;
+        }
+
+        .meta-header a {
+            color: inherit; 
+            text-decoration: underline; 
+            opacity: 0.85; 
+            transition: opacity 0.2s;
+        }
+
+        .meta-header a:hover {
+            opacity: 1;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.4rem, 7vw, 4.5rem);
+            letter-spacing: -0.01em;
+            text-transform: uppercase;
+            margin: 0;
+            line-height: 1.1;
+            font-weight: 400;
+        }
+
+        .hero-subtitle {
+            font-family: 'Playfair Display', serif; 
+            font-size: clamp(1.35rem, 3vw, 1.9rem); 
+            font-style: italic; 
+            font-weight: 400; 
+            margin-top: 30px; 
+            line-height: 1.45; 
+            opacity: 0.95; 
+            max-width: 800px;
+        }
+
+        section {
+            padding-top: 100px;
+            padding-bottom: 40px;
+        }
+        
+        .tag {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.25em;
+            border-bottom: 1px solid var(--text);
+            padding-bottom: 6px;
+            margin-bottom: 40px;
+            display: inline-block;
+            opacity: 0.9;
+            font-weight: 600;
+        }
+
+        .section-subtitle {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            margin-top: 60px;
+            margin-bottom: 30px;
+            font-weight: 600;
+            opacity: 0.9;
+            border-bottom: 1px solid var(--accent);
+            padding-bottom: 10px;
+        }
+        
+        .manifesto {
+            font-size: clamp(1.3rem, 2.5vw, 1.7rem);
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            border-left: 2px solid var(--text);
+            padding-left: 35px;
+            margin: 60px 0;
+            line-height: 1.55;
+            text-align: left;
+        }
+
+        .body-text {
+            font-size: 1.05rem;
+            max-width: 800px;
+            opacity: 0.85;
+            margin-top: 0;
+            margin-bottom: 30px;
+            text-align: left;
+        }
+
+        /* Progression / Method Grid */
+        .method-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 40px;
+            margin-bottom: 40px;
+        }
+
+        .method-card {
+            border-top: 1px solid var(--accent);
+            padding-top: 30px;
+        }
+        
+        .method-card span {
+            font-size: 0.7rem;
+            font-family: monospace;
+            opacity: 0.5;
+            display: block;
+            margin-bottom: 10px;
+            letter-spacing: 0.05em;
+        }
+
+        .method-card h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            margin: 0 0 15px 0;
+            font-weight: 400;
+            color: var(--text);
+        }
+
+        .method-card p {
+            font-size: 0.95rem;
+            margin: 0;
+            opacity: 0.8;
+            max-width: 100%;
+        }
+
+        /* Syllabus Grid */
+        .syllabus-grid {
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); 
+            gap: 45px; 
+            margin-top: 40px;
+            margin-bottom: 40px;
+        }
+
+        .syllabus-card {
+            border-left: 1px solid var(--text); 
+            padding-left: 25px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .syllabus-card-content {
+            margin-bottom: 20px;
+        }
+
+        .syllabus-card span {
+            font-size: 0.75rem; 
+            text-transform: uppercase; 
+            letter-spacing: 0.15em; 
+            display: block; 
+            opacity: 0.5; 
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+
+        .syllabus-card h4 {
+            font-family: 'Playfair Display', serif; 
+            font-size: 1.4rem; 
+            font-weight: 400; 
+            margin: 0 0 15px 0; 
+            font-style: italic;
+        }
+
+        .syllabus-card p {
+            font-size: 0.95rem; 
+            margin: 0; 
+            opacity: 0.8; 
+            line-height: 1.6;
+        }
+
+        .syllabus-author {
+            font-size: 0.8rem; 
+            display: block; 
+            font-weight: 500; 
+            opacity: 0.6; 
+            text-transform: none; 
+            letter-spacing: 0;
+        }
+
+        /* Golden Rule Section Styling */
+        .golden-rule-container {
+            border: 1px solid var(--text);
+            background: var(--white);
+            padding: 60px;
+            margin: 0 8px 40px 0;
+            box-shadow: 8px 8px 0px var(--accent);
+        }
+
+        .golden-rule-container .tag {
+            margin-bottom: 35px;
+        }
+
+        .golden-rule-text {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.25rem, 2.5vw, 1.6rem);
+            line-height: 1.6;
+            margin-bottom: 35px;
+            text-align: left;
+        }
+
+        .quote-block {
+            font-style: italic; 
+            opacity: 0.9; 
+            font-size: clamp(1.1rem, 2vw, 1.35rem); 
+            border-left: 1px solid var(--text); 
+            padding-left: 20px; 
+            margin-bottom: 45px;
+            font-family: 'Playfair Display', serif;
+            line-height: 1.6;
+        }
+
+        /* Shared Lab Button Styling */
+        .lab-btn {
+            display: inline-block;
+            border: 1px solid var(--text);
+            background: transparent;
+            color: var(--text);
+            padding: 16px 32px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            transition: background 0.3s, color 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            font-weight: 600;
+            margin-top: 25px;
+        }
+
+        .lab-btn:hover {
+            background: var(--text);
+            color: var(--white);
+        }
+
+        /* Substack Section Styling */
+        .substack-container {
+            border: 1px solid var(--text);
+            background: var(--text);
+            color: var(--bg);
+            padding: 60px;
+            margin: 40px 0 20px 0;
+            text-align: left;
+            transition: box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .substack-container:hover {
+            box-shadow: 12px 12px 0px var(--accent);
+            transform: translate(-4px, -4px);
+        }
+
+        .substack-container h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.6rem, 4vw, 2.4rem);
+            margin-top: 0;
+            margin-bottom: 20px;
+            font-weight: 400;
+            text-transform: uppercase;
+        }
+
+        .substack-container p {
+            font-size: 1.05rem;
+            opacity: 0.8;
+            max-width: 700px;
+            margin-top: 0;
+            margin-bottom: 35px;
+        }
+
+        .substack-btn {
+            display: inline-block;
+            border: 1px solid var(--bg);
+            background: transparent;
+            color: var(--bg);
+            padding: 18px 36px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            transition: background 0.3s, color 0.3s;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .substack-btn:hover {
+            background: var(--bg);
+            color: var(--text);
+        }
+
+        /* Footer */
+        footer {
+            padding-top: 100px;
+            padding-bottom: 100px;
+            font-size: 0.75rem;
+            opacity: 0.5;
+            border-top: 1px solid var(--accent);
+            text-align: center;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+        }
+
+        /* Responsive Layouts */
+        @media (max-width: 768px) {
+            header { padding-top: 100px; padding-bottom: 60px; }
+            section { padding-top: 60px; padding-bottom: 40px; }
+            footer { padding-top: 60px; padding-bottom: 60px; }
+            nav { justify-content: center; gap: 20px; padding: 20px 5%; flex-wrap: wrap; }
+            .golden-rule-container { padding: 40px 25px; margin: 30px 8px 30px 0; }
+            .substack-container { padding: 40px 25px; margin: 40px 0; }
+            .manifesto { padding-left: 20px; margin: 40px 0; }
+            .syllabus-grid { gap: 35px; }
+            .method-grid { gap: 30px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="#lab">Origin</a>
+        <a href="#syllabus">Syllabus</a>
+        <a href="#protocol">Golden Rule</a>
+        <a href="#dispatch">Dispatch</a>
+    </nav>
+    
+    <header>
+        <div class="meta-header">
+            Principal Investigator: Your Name &nbsp;&middot;&nbsp; Lead Protocol Officer: <a href="https://www.linkedin.com/in/fanidh-sanogo-b47b21119/" target="_blank">Fanidh Sanogo, PhD(c)</a>
+        </div>
+        <h1>The Grimace Lab</h1>
+        <div class="hero-subtitle">
+            For your next move to be your best move, it must be unknown, especially to yourself.
+        </div>         
+    </header>
+
+    <section id="lab">
+        <div class="tag">Origin</div>
+        <p class="body-text" style="font-size: 1.2rem; line-height: 1.7; margin-bottom: 40px; font-family: 'Playfair Display', serif; font-style: italic;">
+           The foundation of the Lab emerged during ethnographic research on the contemporary use of makeup among young women in Ouagadougou, Burkina Faso. It was there that the idea of makeup evolved into a deeper conceptual lens.
+        </p>
+        
+        <p class="body-text">
+           In Ouaga, makeup went beyond the gendered use of cosmetics; it was an active social grimace. Serving an explicit function of social and self-navigation, these are the somatic habits we forge to stay alive. A social grimace designates any form of habitual bodily contortion triggered by specific interactions with others or one's own internalised thoughts.
+        </p>
+
+        <p class="body-text">
+           Soon, it became clear that this practice was not only cultural, it was also deeply human. While fluid bodily contortions and movements allow us to communicate, rigid grimaces systematically freeze parts of the body, paralysing our creative impetus. These rigid bodily contortions do not appear out of nowhere; they are the somatic architecture of beliefs taught by one’s families, schools, and institutions. 
+        </p>
+
+        <div class="manifesto">
+            Your tight neck and frozen jaws are an internalised rulebook of movements—a muscular tension arising as an immediate reflex to a learned emotional trigger.
+        </div>
+
+        <p class="body-text">
+           Unfortunately, some of the habits learned from these institutions are harmful to our bodies. The contemporary labour market requires this numbness to function. It enforces artificial rhythms that force your biology to match an institutional timeline, flattening creative depth into mere performance.
+        </p>
+
+        <div class="section-subtitle">The Strategy of Interception</div>
+        <p class="body-text">
+           Grimace Consciousness rejects the pattern of escaping to a separate meditation cushion just to tolerate a toxic baseline. True wakefulness demands unselective feeling and careful interpretation at your desk, mapping physical contractions directly to inherited institutional metrics.
+        </p>
+
+        <div class="method-grid">
+            <div class="method-card">
+                <span>STAGE 01 // INTERCEPTION</span>
+                <h4>Somatic Liberation</h4>
+                <p>Intercepting automatic physical contractions triggered by institutional stress in real time.</p>
+            </div>
+            <div class="method-card">
+                <span>STAGE 02 // DIVERGENCE</span>
+                <h4>Going Sideways</h4>
+                <p>Refusing structural collapse to explore wordless alignments that let tissue breathe.</p>
+            </div>
+            <div class="method-card">
+                <span>STAGE 03 // INTEGRATION</span>
+                <h4>Resting Wide Awake</h4>
+                <p>Maintaining an internally spacious, uncompressed body while executing complex everyday tasks.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="syllabus">
+        <div class="tag">The 4-Week Laboratory Syllabus</div>
+        
+        <div class="manifesto">
+            "I am doing this because I believe in the liberatory power of ideas. The grimace lab utilises socio-anthropological and philosophical concepts to help set individuals and institutions free from their rigid grimaces. During my PhD, I came across concepts that can experientially shift your organs around. Not only did these concepts shift my relationship with my body and mind, I found them to be great burnout prevention tools."
+            <span style="display: block; font-family: 'Inter', sans-serif; font-size: 0.8rem; font-style: normal; font-weight: 600; text-transform: uppercase; letter-spacing: 0.15em; margin-top: 25px; opacity: 0.8;">— Fanidh Sanogo, Founder</span>
+        </div>    
+        
+        <p class="body-text" style="margin-bottom: 50px;">
+            We do not treat academic texts or somatic protocols as static data to be memorised, but as visceral scalpels. If an idea cannot help you map or dismantle the exact institutional metrics currently dictating your micro actions, it does not belong in this Lab.
+        </p>
+
+        <div class="syllabus-grid">
+            <div class="syllabus-card">
+                <div class="syllabus-card-content">
+                    <span>Week 1</span>
+                    <h4>Anti-Oedipus &amp; Control</h4>
+                    <p>Mapping how modern achievement frameworks capture the nervous system, turning the jaw and neck into an internalised regulatory machine. Initiating the daily Grimace Audit loop.</p>
+                </div>
+                <span class="syllabus-author">— G. Deleuze &amp; F. Guattari</span>
+            </div>
+
+            <div class="syllabus-card">
+                <div class="syllabus-card-content">
+                    <span>Week 2</span>
+                    <h4>For Opacity</h4>
+                    <p>An absolute corporeal refusal to make your internal terrain transparently legible, manageable, or extractable by corporate or academic performance metrics. Cultivating somatic boundaries.</p>
+                </div>
+                <span class="syllabus-author">— Édouard Glissant</span>
+            </div>
+
+            <div class="syllabus-card">
+                <div class="syllabus-card-content">
+                    <span>Week 3</span>
+                    <h4>Creative Evolution</h4>
+                    <p>Halting the "snowball" of institutional stress. Learning to notice the unceasing internal variations of your psychical state before they accumulate enough mass to force a rigid, defensive attitude onto your body.</p>
+                </div>
+                <span class="syllabus-author">— Henri Bergson</span>
+            </div>
+
+            <div class="syllabus-card">
+                <div class="syllabus-card-content">
+                    <span>Week 4</span>
+                    <h4>The Invention of Women</h4>
+                    <p>Decoupling the body from the visual dominance of meaning creation. Undoing the physical policing anchored into our daily micro-movements to cement a permanent baseline of sovereign rest.</p>
+                </div>
+                <span class="syllabus-author">— Oyèrónkẹ́ Oyěwùmí</span>
+            </div>
+        </div>
+    </section>
+
+    <section id="protocol">
+        <div class="tag">The Golden Rule</div>
+
+        <div class="golden-rule-container">
+            <div class="golden-rule-text">
+                <strong>The Core Protocol:</strong> To "Rest wide awake" one must never skip a breath. As soon as you skip a breath, you must move in another direction—mentally and physically.
+            </div>
+            
+            <div class="quote-block">
+                Sit up. Drop your eyebrows. Relax your jaw. Let your head float on an aligned neck. Relax your stomach. Know that you are safe, even if you die. Access this state, and execute entirely from here. 
+            </div>
+
+            <p class="body-text" style="font-size: 0.95rem; opacity: 0.8; margin-bottom: 20px;">
+                <strong>On Necropolitics &amp; Structural Control:</strong> Systemic structures leverage the fear of social or professional death to police behaviour. To heal from automated habits, you must allow those identities created through rigid grimaces to die. This is not passive relaxation, it is a visceral rejection of what was forced down your throat without your consent. A body unable to creatively evolve is a body open to manipulation.
+            </p>
+            
+            <a href="https://grimacelab.github.io/laboffers.github.io/" class="lab-btn">View Laboratory Offers</a>
+        </div>
+    </section>
+
+    <section id="dispatch">
+        <div class="tag">The Dispatch</div>
+
+        <div class="substack-container">
+            <h3>Notes from the Sahel</h3>
+            <p>
+                Receive ongoing somatic protocols, ethnographic research updates, and socio-philosophical diagnostic tools directly from the laboratory field notes.
+            </p>
+            <a href="https://thegrimacelab.substack.com/" class="substack-btn" target="_blank">Subscribe on Substack</a>
+        </div>
+    </section>
+
+    <footer>
+        &copy; 2026 THE GRIMACE LAB | CAPE TOWN, RSA | NOTES FROM THE SAHEL
+    </footer>
+
+</body>
+</html>
